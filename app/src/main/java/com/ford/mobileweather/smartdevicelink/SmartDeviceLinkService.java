@@ -124,6 +124,7 @@ import com.smartdevicelink.proxy.rpc.enums.TextAlignment;
 import com.smartdevicelink.proxy.rpc.enums.TextFieldName;
 import com.smartdevicelink.transport.BTTransportConfig;
 import com.smartdevicelink.transport.BaseTransportConfig;
+import com.smartdevicelink.transport.TCPTransportConfig;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -771,8 +772,8 @@ public class SmartDeviceLinkService extends Service implements IProxyListenerALM
 		if (proxy == null) {
 			try {
 				//proxy = new SyncProxyALM(this, "MobileWeather", true, "330533107");
-				BaseTransportConfig transport = new BTTransportConfig();
-				//BaseTransportConfig transport = new TCPTransportConfig(12345, "10.0.0.2", false);
+//				BaseTransportConfig transport = new BTTransportConfig();
+				BaseTransportConfig transport = new TCPTransportConfig(12345, "192.168.1.105", false);
 				proxy = new SdlProxyALM(this, "MobileWeather", false, mDesiredAppSdlLanguage, mDesiredAppHmiLanguage, "330533107", transport);
 				mRegisteredAppSdlLanguage = mDesiredAppSdlLanguage;
 				mRegisteredAppHmiLanguage = mDesiredAppHmiLanguage;				
@@ -3375,7 +3376,7 @@ public class SmartDeviceLinkService extends Service implements IProxyListenerALM
 
 	@Override
 	public void onServiceDataACK(int dataSize) {
-		
+
 	}
 
 	@Override
