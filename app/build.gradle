@@ -21,5 +21,5 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.google.android.gms:play-services:+'
-    compile files('libs/SmartDeviceLinkLibrary-4.0.0-Android.jar')
+    compile project(path: ':sdl_android')
 }
