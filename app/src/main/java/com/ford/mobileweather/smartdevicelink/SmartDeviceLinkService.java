@@ -44,10 +44,14 @@ import com.smartdevicelink.proxy.interfaces.IProxyListenerALM;
 import com.smartdevicelink.proxy.rpc.AddCommandResponse;
 import com.smartdevicelink.proxy.rpc.AlertManeuverResponse;
 import com.smartdevicelink.proxy.rpc.DialNumberResponse;
+import com.smartdevicelink.proxy.rpc.GetWayPointsResponse;
 import com.smartdevicelink.proxy.rpc.OnStreamRPC;
+import com.smartdevicelink.proxy.rpc.OnWayPointChange;
 import com.smartdevicelink.proxy.rpc.SendLocationResponse;
 import com.smartdevicelink.proxy.rpc.ShowConstantTbtResponse;
 import com.smartdevicelink.proxy.rpc.StreamRPCResponse;
+import com.smartdevicelink.proxy.rpc.SubscribeWayPointsResponse;
+import com.smartdevicelink.proxy.rpc.UnsubscribeWayPointsResponse;
 import com.smartdevicelink.proxy.rpc.UpdateTurnListResponse;
 import com.smartdevicelink.proxy.rpc.AddSubMenuResponse;
 import com.smartdevicelink.proxy.rpc.Alert;
@@ -1300,18 +1304,18 @@ public class SmartDeviceLinkService extends Service implements IProxyListenerALM
 					proxy.sendRPCRequest(showRequest);
 				}
 				if (includeSpeak) {
-					String speakString;
+					String speakString = "common guys!";
 					Vector<TTSChunk> chunks = new Vector<TTSChunk>();
 					TTSChunk chunk = new TTSChunk();
-					if (temperature <= -1) {
-						speakString = String.format(Locale.getDefault(), 
-								getResources().getString(R.string.weather_conditions_neg_temp_speak), 
-								title, temperature * -1, humidity, windSpeed, speedUnitsFull, lengthUnitsFull);
-					} else {
-						speakString = String.format(Locale.getDefault(), 
-								getResources().getString(R.string.weather_conditions_speak), 
-								title, temperature, humidity, windSpeed, speedUnitsFull, lengthUnitsFull);
-					}
+//					if (temperature <= -1) {
+//						speakString = String.format(Locale.getDefault(),
+//								getResources().getString(R.string.weather_conditions_neg_temp_speak),
+//								title, temperature * -1, humidity, windSpeed, speedUnitsFull, lengthUnitsFull);
+//					} else {
+//						speakString = String.format(Locale.getDefault(),
+//								getResources().getString(R.string.weather_conditions_speak),
+//								title, temperature, humidity, windSpeed, speedUnitsFull, lengthUnitsFull);
+//					}
 					chunk.setText(speakString);
 					chunk.setType(SpeechCapabilities.TEXT);
 					chunks.add(chunk);
@@ -3332,11 +3336,11 @@ public class SmartDeviceLinkService extends Service implements IProxyListenerALM
 		
 	}
 
-	@Override
-	public void onServiceDataACK() {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void onServiceDataACK() {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public void onServiceEnded(OnServiceEnded arg0) {
@@ -3367,5 +3371,30 @@ public class SmartDeviceLinkService extends Service implements IProxyListenerALM
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public void onServiceDataACK(int dataSize) {
+
+	}
+
+	@Override
+	public void onGetWayPointsResponse(GetWayPointsResponse response) {
+
+	}
+
+	@Override
+	public void onSubscribeWayPointsResponse(SubscribeWayPointsResponse response) {
+
+	}
+
+	@Override
+	public void onUnsubscribeWayPointsResponse(UnsubscribeWayPointsResponse response) {
+
+	}
+
+	@Override
+	public void onOnWayPointChange(OnWayPointChange notification) {
+
+	}
+
 }

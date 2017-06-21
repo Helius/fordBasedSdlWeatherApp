@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="25" />
 
     <!-- Required for AppLink connection -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -24,6 +24,10 @@
 
     <!-- Required to keep device awake during weather data processing -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- Permissions required for GCM -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
@@ -36,6 +40,10 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
+    <meta-data
+        android:name="android.support.VERSION"
+        android:value="25.3.1" />
 
     <application
         android:name="com.ford.mobileweather.smartdevicelink.SmartDeviceLinkApplication"
@@ -58,18 +66,13 @@
             android:name="com.ford.mobileweather.activity.LockScreenActivity"
             android:configChanges="orientation"
             android:label="Locked"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity android:name="net.hockeyapp.android.UpdateActivity" />
 
-        <service android:name="com.ford.mobileweather.smartdevicelink.SmartDeviceLinkService" >
-        </service>
-        <service android:name="com.ford.mobileweather.wunderground.WUndergroundService" >
-        </service>
-        <service android:name="com.ford.mobileweather.noaa.NOAAService" >
-        </service>
-        <service android:name="com.ford.mobileweather.forecastio.ForecastIoService" >
-        </service>
+        <service android:name="com.ford.mobileweather.smartdevicelink.SmartDeviceLinkService" />
+        <service android:name="com.ford.mobileweather.wunderground.WUndergroundService" />
+        <service android:name="com.ford.mobileweather.noaa.NOAAService" />
+        <service android:name="com.ford.mobileweather.forecastio.ForecastIoService" />
 
         <receiver android:name="com.ford.mobileweather.smartdevicelink.SmartDeviceLinkReceiver" >
             <intent-filter>
@@ -77,12 +80,16 @@
                 <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.ford.mobileweather.weather.WeatherUpdateWakefulReceiver" >
-        </receiver>
+        <receiver android:name="com.ford.mobileweather.weather.WeatherUpdateWakefulReceiver" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="com.ford.mobileweather.smartdevicelink.SdlReceiver"
+            android:enabled="true"
+            android:exported="true" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
